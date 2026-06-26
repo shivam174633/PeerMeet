@@ -172,7 +172,6 @@ export default function VideoMeet() {
 
             socketRef.current.on("user-joined", (id, clients) => {
                 clients.forEach((socketListId) => {
-                    // CRITICAL FIX: Skip connecting to yourself or overwriting existing active connections
                     if (socketListId === socketId.current) return;
                     if (connections[socketListId]) return; 
 
@@ -184,26 +183,24 @@ export default function VideoMeet() {
                         }
                     };
 
-                    // MODERN WEBRTC API: Use ontrack instead of deprecated onaddstream
-                    // MODERN WEBRTC API: Use ontrack instead of deprecated onaddstream
                     connections[socketListId].ontrack = (event) => {
     
-                        // FIX: Race condition se bachne ke liye functional state (prevVideos) ka use karenge
+                        
                         setVideos((prevVideos) => {
-                        // Yahan hum bilkul accurate aur latest videos array check kar rahe hain
+                    
                             let videoExists = prevVideos.find(video => video.socketId === socketListId);
 
                             if (videoExists) {
-                            // Agar user ki video pehle se array mein hai, toh naya box mat banao, bas stream map kar do
+                            
                             const updatedVideos = prevVideos.map(video =>
                             video.socketId === socketListId
                             ?{ ...video, stream: event.streams[0] }
                             : video
                             );
-                            videoRef.current = updatedVideos; // Ref ko bhi update kar rahe hain future reference ke liye
+                            videoRef.current = updatedVideos; 
                             return updatedVideos;
                         } else {
-                        // Agar user pehle se array mein NAHI hai, tabhi ek naya video element push hoga
+                        
                         let newVideo = {
                         socketId: socketListId,
                         stream: event.streams[0],
@@ -217,7 +214,7 @@ export default function VideoMeet() {
                 });
             };
 
-                    // Add existing tracks to the peer connection
+                  
                     if (window.localStream) {
                         window.localStream.getTracks().forEach(track => {
                             connections[socketListId].addTrack(track, window.localStream);
@@ -230,7 +227,6 @@ export default function VideoMeet() {
                     }
                 });
 
-                // If you are the newly joined user, create and send offers to everyone else
                 if (id === socketId.current) {
                     for (let id2 in connections) {
                         if (id2 === socketId.current) continue;
