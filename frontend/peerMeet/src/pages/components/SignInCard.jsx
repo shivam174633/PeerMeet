@@ -11,6 +11,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from "@mui/material/Alert"
+import { useNavigate } from 'react-router-dom';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -26,6 +27,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 export default function SignInCard() {
+  const navigate=useNavigate("");
 
   const [formState, setFormState] = useState(0);
 
@@ -53,6 +55,8 @@ export default function SignInCard() {
         let result=await handleLogin(username,password);
         setMessage(result);
         setOpen(true);
+
+        navigate("/home")
       }
       if(formState===1){
         let result=await handleRegister(name,username,password);

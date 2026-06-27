@@ -101,7 +101,6 @@ export default function VideoMeet() {
                     localVideoRef.current.srcObject = mediaStream;
                 }
             } else {
-                // Fallback if no devices are found or permitted
                 window.localStream = createBlackSilenceStream();
                 if (localVideoRef.current) {
                     localVideoRef.current.srcObject = window.localStream;
@@ -172,6 +171,10 @@ export default function VideoMeet() {
 
             socketRef.current.on("user-joined", (id, clients) => {
                 clients.forEach((socketListId) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 393aad87 (Added meeting history and login redirect)
                     if (socketListId === socketId.current) return;
                     if (connections[socketListId]) return; 
 
@@ -183,6 +186,7 @@ export default function VideoMeet() {
                         }
                     };
 
+<<<<<<< HEAD
                     connections[socketListId].ontrack = (event) => {
     
                         
@@ -192,6 +196,15 @@ export default function VideoMeet() {
 
                             if (videoExists) {
                             
+=======
+                
+                    connections[socketListId].ontrack = (event) => {
+
+                        setVideos((prevVideos) => {
+                            let videoExists = prevVideos.find(video => video.socketId === socketListId);
+
+                            if (videoExists) {
+>>>>>>> 393aad87 (Added meeting history and login redirect)
                             const updatedVideos = prevVideos.map(video =>
                             video.socketId === socketListId
                             ?{ ...video, stream: event.streams[0] }
@@ -200,7 +213,10 @@ export default function VideoMeet() {
                             videoRef.current = updatedVideos; 
                             return updatedVideos;
                         } else {
+<<<<<<< HEAD
                         
+=======
+>>>>>>> 393aad87 (Added meeting history and login redirect)
                         let newVideo = {
                         socketId: socketListId,
                         stream: event.streams[0],
@@ -214,7 +230,10 @@ export default function VideoMeet() {
                 });
             };
 
+<<<<<<< HEAD
                   
+=======
+>>>>>>> 393aad87 (Added meeting history and login redirect)
                     if (window.localStream) {
                         window.localStream.getTracks().forEach(track => {
                             connections[socketListId].addTrack(track, window.localStream);
@@ -344,14 +363,14 @@ let stopScreenShare = async () => {
     }catch(e){
         console.log(e);
     }
-    routeTo("/");
+    routeTo("/home");
  }
 
     return (
         <div>
             {askForUsername === true ? (
-                <div>
-                    <h2 style={{ color: "black" }}>Enter Into Lobby</h2>
+                <div className='lobby'>
+                    <h2>Enter Into Lobby</h2>
                     <TextField id="outlined-basic" label="Username" value={username} variant="outlined" onChange={(e) => setUsername(e.target.value)} />
                     <Button variant="contained" onClick={getMedia}>Connect</Button>
                     <div>
@@ -359,6 +378,7 @@ let stopScreenShare = async () => {
                     </div>
                 </div>
             ) : (
+                <div className="mainPage">
                 <div className='meetVideoContainer'>
                     {showModal?
                     <div className="chatRoom">
@@ -423,6 +443,7 @@ let stopScreenShare = async () => {
                         </div>
                     ))}
                     </div>
+                </div>
                 </div>
             )}
         </div>

@@ -3,6 +3,7 @@ const bcrypt=require("bcrypt");
 const {StatusCodes}=require("http-status-codes");
 const crypto=require("crypto");
 const jwt=require("jsonwebtoken");
+const meeting = require("../models/meeting.js");
 
 module.exports.register = async (req, res) => {
     const { name, username, password } = req.body;
@@ -89,3 +90,32 @@ module.exports.login = async (req, res) => {
                   .json({ message: e.message });
     }
 };
+
+
+module.exports.getUserHistory=async(req,res)=>{
+    const {token}=req.query;
+    try{
+       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const meetings=await meeting.find({user_id:decoded.username});
+        res.json(meetings);
+    } catch(e){
+        res.json({message:`something went wrong ${e}`});
+    }
+}
+
+module.exports.addToHistory=async(req,res)=>{
+    const {token,meeting_code}=req.body;
+
+    try{
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const newMeeting=new meeting({
+            user_id:decoded.username,
+            meetingCode:meeting_code,
+        })
+        await newMeeting.save();
+        res.status(StatusCodes.CREATED).json({message:"added code to history"})
+    } catch(e){
+        res.json(`Something Went Wrong ${e}`);
+    }
+
+}

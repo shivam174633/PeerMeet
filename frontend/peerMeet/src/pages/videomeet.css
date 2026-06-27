@@ -1,9 +1,9 @@
-.meetVideoContainer{
+.mainPage .meetVideoContainer{
     position: relative;
     height:100vh;
     background-color:rgba(0, 0, 0);
 }
-.meetUserVideo{
+.mainPage .meetUserVideo{
     position: absolute;
     bottom: 10vh;
     height:20vh;
@@ -11,10 +11,10 @@
     left:0;
 
 }
-video {
+.mainPage video {
     transform: scaleX(-1);
 }
-.buttonContainer {
+.mainPage .buttonContainer {
     position: absolute;
     bottom: 20px;
     width: 100%;
@@ -23,21 +23,22 @@ video {
     justify-content: center;
     gap: 15px;
 }
-.buttonContainer svg{
+.mainPage .buttonContainer svg{
     font-size: 3rem;
+    color: white;
 }
-.conferenceView{
+.mainPage .conferenceView{
     display:flex;
     padding: 10px;
     gap: 10px;
     flex-wrap: wrap;
 }
-.conferenceView video{
+.mainPage .conferenceView video{
     width: 30vw;
     min-width: 20vw;
     border-radius: 20px;
 }
-.chatRoom{
+.mainPage .chatRoom{
     position:absolute;
     height:90vh;
     right:0;
@@ -48,22 +49,72 @@ video {
     color: #000;
 
 }
-.chatContainer{
+.mainPage .chatContainer{
     position: relative;
     height:100%;
 }
-.chatContainer h1{
+.mainPage .chatContainer h1{
     color: black;
 }
-.chattingDisplay p{
+.mainPage.chattingDisplay p{
     color: black;
 }
-.chattingArea{
+.mainPage .chattingArea{
     position: absolute;
     bottom:0;
 }
-.chattingDisplay{
+.mainPage.chattingDisplay{
     height: 80%;
     overflow-y: auto;
     padding: 10px;
+}
+
+.lobby {
+    background-color: black;
+    color: white;
+
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.lobby h2 {
+    color: white !important;
+}
+
+.lobby video {
+    width: 350px;
+    border: 2px solid white;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.lobby .MuiInputBase-input {
+    color: white;
+}
+
+.lobby .MuiInputLabel-root {
+    color: white;
+}
+
+.lobby .MuiInputLabel-root.Mui-focused {
+    color: white;
+}
+
+.lobby .MuiOutlinedInput-notchedOutline {
+    border-color: white;
+}
+
+.lobby .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: white;
+}
+
+.lobby .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: white;
 }

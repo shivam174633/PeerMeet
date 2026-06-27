@@ -1,0 +1,73 @@
+
+.homePage{
+    background-color: black;
+    min-height: 120vh;
+    color: white;
+}
+.homePage .navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-inline: 20px;
+  text-align: center;
+}
+.homePage  p{
+    color: white;
+}
+
+.homePage .meetContainer {
+  display: flex;
+  padding-inline: 20px;
+  height: 80vh;
+  gap: 10vw;
+  justify-content: center;
+
+}
+
+.homePage .leftPanel {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+}
+
+.homePage .meetingField {
+    width: 300px;
+}
+
+.homePage .meetingField .MuiOutlinedInput-root input {
+    color: white;
+}
+
+.homePage .meetingField .MuiOutlinedInput-root fieldset {
+    border-color: white;
+}
+
+.homePage .meetingField .MuiOutlinedInput-root:hover fieldset {
+    border-color: white;
+}
+
+.homePage .meetingField .MuiOutlinedInput-root.Mui-focused fieldset {
+    border-color: white;
+}
+
+.homePage .meetingField .MuiInputLabel-root {
+    color: white;
+}
+
+.homePage .meetingField .MuiInputLabel-root.Mui-focused {
+    color: white;
+}
+
+
+.homePage .rightPanel {
+  display: flex;
+  align-items: center;
+}
+
+.homePage .rightPanel > img {
+  width: 30vw;
+  height: auto;
+  border-radius: 20px;
+}
