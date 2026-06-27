@@ -13,9 +13,10 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 import ChatIcon from '@mui/icons-material/Chat';
 import { useNavigate } from 'react-router-dom';
+import server from '../environment';
 
 
-const server_url = "http://localhost:8080";
+const server_url = server;
 var connections = {};
 
 const peerConfigConnections = {
@@ -171,10 +172,6 @@ export default function VideoMeet() {
 
             socketRef.current.on("user-joined", (id, clients) => {
                 clients.forEach((socketListId) => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 393aad87 (Added meeting history and login redirect)
                     if (socketListId === socketId.current) return;
                     if (connections[socketListId]) return; 
 
@@ -186,7 +183,6 @@ export default function VideoMeet() {
                         }
                     };
 
-<<<<<<< HEAD
                     connections[socketListId].ontrack = (event) => {
     
                         
@@ -196,15 +192,6 @@ export default function VideoMeet() {
 
                             if (videoExists) {
                             
-=======
-                
-                    connections[socketListId].ontrack = (event) => {
-
-                        setVideos((prevVideos) => {
-                            let videoExists = prevVideos.find(video => video.socketId === socketListId);
-
-                            if (videoExists) {
->>>>>>> 393aad87 (Added meeting history and login redirect)
                             const updatedVideos = prevVideos.map(video =>
                             video.socketId === socketListId
                             ?{ ...video, stream: event.streams[0] }
@@ -213,10 +200,7 @@ export default function VideoMeet() {
                             videoRef.current = updatedVideos; 
                             return updatedVideos;
                         } else {
-<<<<<<< HEAD
                         
-=======
->>>>>>> 393aad87 (Added meeting history and login redirect)
                         let newVideo = {
                         socketId: socketListId,
                         stream: event.streams[0],
@@ -230,10 +214,7 @@ export default function VideoMeet() {
                 });
             };
 
-<<<<<<< HEAD
                   
-=======
->>>>>>> 393aad87 (Added meeting history and login redirect)
                     if (window.localStream) {
                         window.localStream.getTracks().forEach(track => {
                             connections[socketListId].addTrack(track, window.localStream);

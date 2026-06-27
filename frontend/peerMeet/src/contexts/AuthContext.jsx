@@ -6,12 +6,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StatusCodes } from "http-status-codes";
 import { typography } from "../shared-theme/themePrimitives";
+import server from "../environment"
 
 
 export const AuthContext=createContext({});
 
 const client=axios.create({
-    baseURL:"http://localhost:8080/users"
+    baseURL:`${server}/users`
 })
 
 export const AuthProvider=({children})=>{
